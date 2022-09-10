@@ -1,0 +1,27 @@
+.container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner_container {
+  background-color: #fff;
+  padding: 32px;
+  box-shadow: 0 0 8px 4px lightgray;
+  border-radius: 24px;
+}
+
+.start_button {
+  background-color: teal;
+  color: #fff;
+  font-weight: bold;
+  padding: 16px;
+  margin: 46px auto;
+  display: block;
+}
+
+.start_button:hover {
+  opacity: 0.5;
+}
