@@ -11,6 +11,7 @@ import styles from '../styles/Result.module.css'
 import { useReward } from 'react-rewards'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { nightOwl } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
+import useBreakpoints from '../hooks/useBreakPoints'
 
 export const Result = () => {
   const result = useResult()
@@ -24,6 +25,8 @@ export const Result = () => {
     spread: 120,
   })
   const rewardInitialized = useRef(false)
+  const { isXs } = useBreakpoints()
+
   const correctCount = result.reduce((prev, current) => {
     const target = dataSource.find((d) => d.id === current.id)
     if (target?.answerId === current.answer) {
@@ -84,18 +87,20 @@ export const Result = () => {
               </div>
 
               {d.code && (
-                <SyntaxHighlighter
-                  language="js"
-                  style={nightOwl}
-                  customStyle={{
-                    padding: '16px',
-                    borderRadius: '24px',
-                    fontSize: '14px',
-                    margin: '0px',
-                  }}
-                >
-                  {d.code}
-                </SyntaxHighlighter>
+                <div className={styles.code}>
+                  <SyntaxHighlighter
+                    language="js"
+                    style={nightOwl}
+                    customStyle={{
+                      fontSize: isXs ? '12px' : '16px',
+                      padding: '16px',
+                      borderRadius: '16px',
+                      margin: '0px',
+                    }}
+                  >
+                    {d.code}
+                  </SyntaxHighlighter>
+                </div>
               )}
             </div>
           )

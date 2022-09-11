@@ -16,7 +16,7 @@
   margin: 46px 24px 0px 24px;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 640px) {
   .quiz {
     font-size: 40px;
   }
@@ -33,7 +33,7 @@
   justify-content: center;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 640px) {
   .answer_container {
     display: flex;
     gap: 24px;

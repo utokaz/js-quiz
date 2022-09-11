@@ -5,6 +5,7 @@ import { dataSource } from '../dataSource'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAnswer, useIsPlaying } from '../privider/GameProvider'
+import useBreakpoints from '../hooks/useBreakPoints'
 
 export const Quiz = () => {
   const navigate = useNavigate()
@@ -12,6 +13,7 @@ export const Quiz = () => {
   const [gameIndex, setGameIndex] = useState(0)
   const quiz = dataSource[gameIndex]
   const isPlaying = useIsPlaying()
+  const { isXs } = useBreakpoints()
 
   const onClickAnswer = (answerId: number) => {
     const id = dataSource[gameIndex].id
@@ -41,8 +43,9 @@ export const Quiz = () => {
           language="js"
           style={nightOwl}
           customStyle={{
-            padding: '16px',
-            borderRadius: '24px',
+            padding: '24px',
+            borderRadius: '16px',
+            fontSize: isXs ? '14px' : '24px',
             margin: '0px',
           }}
         >
