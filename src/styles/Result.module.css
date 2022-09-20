@@ -1,7 +1,7 @@
 .container {
   height: 100vh;
   width: 100vw;
-  overflow: auto;
+  overflow-y: scroll;
 }
 
 .correct_count {
@@ -41,12 +41,6 @@
   min-width: 60%;
 }
 
-@media screen and (min-width: '640px') {
-  .answer {
-    flex-direction: row;
-  }
-}
-
 .restart_button {
   background-color: teal;
   color: #fff;
@@ -69,4 +63,15 @@
 .keywords > span {
   color: #213547;
   font-weight: no;
+}
+
+.code {
+  position: relative;
+  width: 90%;
+}
+
+.copy {
+  position: absolute;
+  top: 8px;
+  right: -24px;
 }

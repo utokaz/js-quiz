@@ -19,7 +19,7 @@ export const Top = () => {
   return (
     <div className={styles.container}>
       <div className={styles.inner_container}>
-        <h1>JavaScript Quiz</h1>
+        <h1 className={styles.title}>JavaScript Quiz</h1>
         <button className={styles.start_button} onClick={onCLickStart}>
           クイズを始める
         </button>

@@ -37,12 +37,13 @@ export const Quiz = () => {
         <span>Q{gameIndex + 1}. </span>
         <p className={styles.quiz_phrase}>{quiz.question}</p>
       </div>
-      {quiz.image}
+      {quiz.Image && <quiz.Image className={styles.image} />}
       {quiz.code && (
         <SyntaxHighlighter
           language="js"
           style={nightOwl}
           customStyle={{
+            maxWidth: '80%',
             padding: '24px',
             borderRadius: '16px',
             fontSize: isXs ? '14px' : '24px',

@@ -7,6 +7,7 @@
 }
 
 .inner_container {
+  margin: 24px;
   background-color: #fff;
   padding: 32px;
   box-shadow: 0 0 8px 4px lightgray;
@@ -18,10 +19,14 @@
   color: #fff;
   font-weight: bold;
   padding: 16px;
-  margin: 46px auto;
+  margin: 32px auto;
   display: block;
 }
 
 .start_button:hover {
   opacity: 0.5;
+}
+
+.title {
+  margin: 0px;
 }

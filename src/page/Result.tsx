@@ -12,6 +12,7 @@ import { useReward } from 'react-rewards'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { nightOwl } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 import useBreakpoints from '../hooks/useBreakPoints'
+import { CopyButton } from '../components/CopyButton'
 
 export const Result = () => {
   const result = useResult()
@@ -23,6 +24,7 @@ export const Result = () => {
     lifetime: 1000,
     elementCount: 300,
     spread: 120,
+    zIndex: 999,
   })
   const rewardInitialized = useRef(false)
   const { isXs } = useBreakpoints()
@@ -88,6 +90,9 @@ export const Result = () => {
 
               {d.code && (
                 <div className={styles.code}>
+                  <CopyButton copytext={d.code} className={styles.copy}>
+                    copy
+                  </CopyButton>
                   <SyntaxHighlighter
                     language="js"
                     style={nightOwl}
@@ -96,6 +101,7 @@ export const Result = () => {
                       padding: '16px',
                       borderRadius: '16px',
                       margin: '0px',
+                      width: '100%',
                     }}
                   >
                     {d.code}

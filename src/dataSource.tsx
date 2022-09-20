@@ -1,3 +1,4 @@
+import { ComponentPropsWithoutRef, PropsWithoutRef, ReactNode } from 'react'
 import brendanEichImage from './assets/BrendanEich.jpeg'
 import jsLogo from './assets/js_logo.png'
 
@@ -6,7 +7,7 @@ type DataSource = {
   question: string
   code?: string
   answerId: number
-  image?: JSX.Element
+  Image?: (props: ComponentPropsWithoutRef<'img'>) => JSX.Element
   keywords?: string[]
   selections: {
     id: number
@@ -20,10 +21,15 @@ export const dataSource: DataSource = [
     question:
       '2022年現在、JavaScriptは現在全てのウェブサイトのうちどのくらいの割合で利用されているでしょう？',
     answerId: 2,
-    image: (
-      <div>
-        <img style={{ width: '300px', borderRadius: '24px' }} src={jsLogo} />
-      </div>
+    Image: (props) => (
+      <img
+        alt="javascript logo"
+        height={300}
+        aspect-ratio={1}
+        {...props}
+        style={{ borderRadius: '24px' }}
+        src={jsLogo}
+      />
     ),
     selections: [
       { id: 1, selectStr: '100%' },
@@ -37,10 +43,14 @@ export const dataSource: DataSource = [
     question:
       'ブレンダン・アイク(JavaScriptの生みの親)がJavaScriptを作るのにかかった期間は次のうちどれでしょう？',
     answerId: 1,
-    image: (
+    Image: (props) => (
       <div>
         <img
-          style={{ width: '300px', borderRadius: '24px' }}
+          alt="Brendan Eich"
+          height={300}
+          aspect-ratio={1}
+          {...props}
+          style={{ borderRadius: '24px' }}
           src={brendanEichImage}
         />
         <p style={{ margin: '0px', fontSize: '4px' }}>
@@ -64,7 +74,7 @@ export const dataSource: DataSource = [
     question: 'このプログラムを実行したときの出力結果を選んでください',
     code: `var companyName = "sys21"
 
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i< 5; i++) {
     var companyName = \`sys2\${\i\}\`
 }
 
@@ -80,12 +90,56 @@ console.log(companyName)`,
   },
   {
     id: 4,
+    question:
+      '環境に左右されない汎用的な言語のコア部分としてのJavaScriptの標準規格はなんという名前でしょうか',
+    answerId: 1,
+    selections: [
+      { id: 1, selectStr: 'ECMAScript' },
+      { id: 2, selectStr: 'LiveScript' },
+      { id: 3, selectStr: 'ActionScript' },
+      { id: 4, selectStr: 'CoffeeScript' },
+    ],
+    keywords: ['Ecma International', 'CommonJS'],
+  },
+  {
+    id: 5,
+    question: 'このプログラムを実行したときの出力結果を選んでください',
+    code: `class Person {
+    hobby = "paly piano"
+    logHobbyOneSecLater = function() {
+        // 1000ミリ秒後(1秒後)にhobbyを出力するよ
+        setTimeout(function() {
+            console.log(this.hobby)
+        }, 1000)
+    }
+}
+
+const p = new Person();
+p.logHobbyOneSecLater()`,
+    answerId: 3,
+    selections: [
+      { id: 1, selectStr: 'play piano' },
+      { id: 2, selectStr: 'null' },
+      { id: 3, selectStr: 'undefined' },
+      { id: 4, selectStr: 'ランタイムエラーが起きる' },
+    ],
+    keywords: [
+      'this',
+      'bindメソッド',
+      'callメソッド',
+      'applyメソッド',
+      'レキシカルスコープ',
+      'アロー関数',
+    ],
+  },
+  {
+    id: 6,
     question: 'このプログラムを実行したときの出力結果を選んでください',
     code: `console.log("1")
 
 setTimeout(() => {
     console.log("2")
-})
+}, 0)
 
 console.log("3")`,
     answerId: 2,
@@ -131,50 +185,6 @@ console.log("3")`,
         ),
       },
     ],
-    keywords: ['非同期処理', 'イベントループ'],
-  },
-  {
-    id: 5,
-    question:
-      '環境に左右されない汎用的な言語のコア部分としてのJavaScriptの標準規格はなんという名前でしょうか',
-    answerId: 1,
-    selections: [
-      { id: 1, selectStr: 'ECMAScript' },
-      { id: 2, selectStr: 'LiveScript' },
-      { id: 3, selectStr: 'ActionScript' },
-      { id: 4, selectStr: 'CoffeeScript' },
-    ],
-    keywords: ['Ecma International'],
-  },
-  {
-    id: 6,
-    question: 'このプログラムを実行したときの出力結果を選んでください',
-    code: `class Person {
-    hobby = "paly piano"
-    logHobbyOneSecLater = function() {
-        // 1000ミリ秒後(1秒後)にhobbyを出力するよ
-        setTimeout(function() {
-            console.log(this.hobby)
-        }, 1000)
-    }
-}
-
-const p = new Person();
-p.logHobbyOneSecLater()`,
-    answerId: 3,
-    selections: [
-      { id: 1, selectStr: 'play piano' },
-      { id: 2, selectStr: 'null' },
-      { id: 3, selectStr: 'undefined' },
-      { id: 4, selectStr: 'ランタイムエラーが起きる' },
-    ],
-    keywords: [
-      'this',
-      'bindメソッド',
-      'callメソッド',
-      'applyメソッド',
-      'レキシカルスコープ',
-      'アロー関数',
-    ],
+    keywords: ['非同期処理', 'イベントループ', 'シングルスレッド'],
   },
 ]
