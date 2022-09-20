@@ -77,10 +77,10 @@ for (let i = 0; i< 5; i++) {
     var companyName = \`sys2\${i}\`
 }
 
-console.log(companyName)`,answerId:4,selections:[{id:1,selectStr:"sys21"},{id:2,selectStr:"sys22"},{id:3,selectStr:"sys23"},{id:4,selectStr:"sys24"}],keywords:["\u30B0\u30ED\u30FC\u30D0\u30EB\u30B9\u30B3\u30FC\u30D7","\u5DFB\u304D\u4E0A\u3052","let","const"]},{id:4,question:"\u74B0\u5883\u306B\u5DE6\u53F3\u3055\u308C\u306A\u3044\u6C4E\u7528\u7684\u306A\u8A00\u8A9E\u306E\u30B3\u30A2\u90E8\u5206\u3068\u3057\u3066\u306EJavaScript\u306E\u6A19\u6E96\u898F\u683C\u306F\u306A\u3093\u3068\u3044\u3046\u540D\u524D\u3067\u3057\u3087\u3046\u304B",answerId:1,selections:[{id:1,selectStr:"ECMAScript"},{id:2,selectStr:"LiveScript"},{id:3,selectStr:"ActionScript"},{id:4,selectStr:"CoffeeScript"}],keywords:["Ecma International","CommonJS"]},{id:5,question:"\u3053\u306E\u30D7\u30ED\u30B0\u30E9\u30E0\u3092\u5B9F\u884C\u3057\u305F\u3068\u304D\u306E\u51FA\u529B\u7D50\u679C\u3092\u9078\u3093\u3067\u304F\u3060\u3055\u3044",code:`class Person {
+console.log(companyName)`,answerId:4,selections:[{id:1,selectStr:"sys21"},{id:2,selectStr:"sys22"},{id:3,selectStr:"sys23"},{id:4,selectStr:"sys24"}],keywords:["\u30B0\u30ED\u30FC\u30D0\u30EB\u30B9\u30B3\u30FC\u30D7","\u5DFB\u304D\u4E0A\u3052","let","const"]},{id:4,question:"\u74B0\u5883\u306B\u5DE6\u53F3\u3055\u308C\u306A\u3044\u6C4E\u7528\u7684\u306A\u8A00\u8A9E\u306E\u30B3\u30A2\u90E8\u5206\u3068\u3057\u3066\u306EJavaScript\u306E\u6A19\u6E96\u898F\u683C\u306F\u306A\u3093\u3068\u3044\u3046\u540D\u524D\u3067\u3057\u3087\u3046\u304B",answerId:1,selections:[{id:1,selectStr:"ECMAScript"},{id:2,selectStr:"LiveScript"},{id:3,selectStr:"ActionScript"},{id:4,selectStr:"CoffeeScript"}],keywords:["Ecma International","CommonJS","\u30B5\u30FC\u30D0\u30FC\u30B5\u30A4\u30C9JS"]},{id:5,question:"\u3053\u306E\u30D7\u30ED\u30B0\u30E9\u30E0\u3092\u5B9F\u884C\u3057\u305F\u3068\u304D\u306E\u51FA\u529B\u7D50\u679C\u3092\u9078\u3093\u3067\u304F\u3060\u3055\u3044",code:`class Person {
     hobby = "paly piano"
     logHobbyOneSecLater = function() {
-        // 1000\u30DF\u30EA\u79D2\u5F8C(1\u79D2\u5F8C)\u306Bhobby\u3092\u51FA\u529B\u3059\u308B\u3088
+        // \u7B2C\u4E00\u5F15\u6570\u306B1000\u30DF\u30EA\u79D2\u5F8C(1\u79D2\u5F8C)\u306B\u5B9F\u884C\u3055\u308C\u308B\u95A2\u6570\u3092\u6E21\u3059
         setTimeout(function() {
             console.log(this.hobby)
         }, 1000)
