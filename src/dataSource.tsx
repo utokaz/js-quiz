@@ -44,7 +44,14 @@ export const dataSource: DataSource = [
       'ブレンダン・アイク(JavaScriptの生みの親)がJavaScriptを作るのにかかった期間は次のうちどれでしょう？',
     answerId: 1,
     Image: (props) => (
-      <div>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '8px',
+        }}
+      >
         <img
           alt="Brendan Eich"
           height={300}
@@ -99,7 +106,7 @@ console.log(companyName)`,
       { id: 3, selectStr: 'ActionScript' },
       { id: 4, selectStr: 'CoffeeScript' },
     ],
-    keywords: ['Ecma International', 'CommonJS'],
+    keywords: ['Ecma International', 'CommonJS', 'サーバーサイドJS'],
   },
   {
     id: 5,
@@ -107,7 +114,7 @@ console.log(companyName)`,
     code: `class Person {
     hobby = "paly piano"
     logHobbyOneSecLater = function() {
-        // 1000ミリ秒後(1秒後)にhobbyを出力するよ
+        // 第一引数に1000ミリ秒後(1秒後)に実行される関数を渡す
         setTimeout(function() {
             console.log(this.hobby)
         }, 1000)
