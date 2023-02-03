@@ -53,7 +53,7 @@ export const Result = () => {
       navigate('/', { replace: true })
     }
     gameOver()
-  }, [])
+  }, [gameOver, isPlaying, navigate, reward])
 
   return (
     <div className={styles.container}>

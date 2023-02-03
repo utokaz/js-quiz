@@ -2,7 +2,7 @@ import SyntaxHighlighter from 'react-syntax-highlighter/dist/esm/default-highlig
 import { nightOwl } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 import styles from '../styles/Quiz.module.css'
 import { dataSource } from '../dataSource'
-import { useEffect, useInsertionEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAnswer, useIsPlaying } from '../privider/GameProvider'
 import useBreakpoints from '../hooks/useBreakPoints'
@@ -30,9 +30,10 @@ export const Quiz = () => {
     if (!isPlaying) {
       navigate('/', { replace: true })
     }
-  }, [])
+  }, [isPlaying, navigate])
 
   useEffect(() => {
+    const containerRef = innerContainerRef.current
     if (innerContainerRef.current) {
       requestAnimationFrame(() => {
         if (innerContainerRef.current) {
@@ -43,10 +44,10 @@ export const Quiz = () => {
       })
     }
     return () => {
-      if (innerContainerRef.current) {
-        innerContainerRef.current.style.transition = ''
-        innerContainerRef.current.style.opacity = ''
-        innerContainerRef.current.style.transform = ''
+      if (containerRef) {
+        containerRef.style.transition = ''
+        containerRef.style.opacity = ''
+        containerRef.style.transform = ''
       }
     }
   }, [gameIndex])
