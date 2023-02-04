@@ -1,13 +1,13 @@
 import { BrowserRouter } from 'react-router-dom'
-import { GameProvider } from './privider/GameProvider'
+import { GameStateProvider } from './privider/GameProvider'
 import { AppRoutes } from './routes'
 
 function App() {
   return (
     <BrowserRouter basename="js-quiz">
-      <GameProvider>
+      <GameStateProvider>
         <AppRoutes />
-      </GameProvider>
+      </GameStateProvider>
     </BrowserRouter>
   )
 }

@@ -1,7 +1,9 @@
 .container {
   height: 100vh;
-  width: 100vw;
-  overflow-y: scroll;
+}
+
+.main {
+  overflow: hidden;
 }
 
 .correct_count {
@@ -30,6 +32,7 @@
 }
 
 .answer {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -74,4 +77,18 @@
   position: absolute;
   top: 8px;
   right: -24px;
+}
+
+.horizontal_line {
+  background-color: lightgray;
+  height: 1px;
+  width: 100%;
+}
+
+.result_mark {
+  position: absolute;
+  opacity: 0.2;
+  font-size: 40px;
+  top: 12px;
+  left: 16px;
 }

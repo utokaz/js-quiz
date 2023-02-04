@@ -1,67 +1,89 @@
-import { createContext, ReactNode, useContext } from 'react'
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  SetStateAction,
+  useState,
+  Dispatch,
+} from 'react'
 
 type GameProviderProps = {
   children: ReactNode
 }
 
-type GameContext = {
+type GameState = {
   isPlaying: boolean
   answers: { id: number; answer: number }[]
+}
+type GameContext = {
+  game: GameState
+  setGame: Dispatch<SetStateAction<GameState>>
 }
 
 const ctx = createContext<GameContext | null>(null)
 
-export const GameProvider = ({ children }: GameProviderProps) => {
+export const GameStateProvider = ({ children }: GameProviderProps) => {
+  const [game, setGame] = useState<GameState>({ isPlaying: false, answers: [] })
   return (
-    <ctx.Provider value={{ isPlaying: false, answers: [] }}>
+    <ctx.Provider
+      value={{
+        game,
+        setGame,
+      }}
+    >
       {children}
     </ctx.Provider>
   )
 }
 
-export const useGameStart = () => {
+export const useGame = () => {
   const game = useContext(ctx)
   if (game == null) {
     throw new Error('useGameStart must be used within Game Provider')
   }
+  return game.game
+}
+
+export const useGameStart = () => {
+  const mutate = useContext(ctx)
+  if (mutate == null) {
+    throw new Error('useGameStart must be used within Game Provider')
+  }
   return () => {
-    game.answers = []
-    game.isPlaying = true
+    mutate.setGame((game) => {
+      game.isPlaying = true
+      game.answers = []
+      return { ...game }
+    })
   }
 }
 
 export const useGameOver = () => {
-  const game = useContext(ctx)
-  if (game == null) {
-    throw new Error('useGameOver must be used within Game Provider')
+  const mutate = useContext(ctx)
+  if (mutate == null) {
+    throw new Error('useGameStart must be used within Game Provider')
   }
   return () => {
-    game.isPlaying = false
+    mutate.setGame((game) => {
+      game.isPlaying = false
+      return { ...game }
+    })
   }
-}
-
-export const useIsPlaying = () => {
-  const game = useContext(ctx)
-  if (game == null) {
-    throw new Error('useIsPlaying must be used within Game Provider')
-  }
-  return game.isPlaying
 }
 
 export const useAnswer = () => {
-  const game = useContext(ctx)
-  if (game == null) {
+  const mutate = useContext(ctx)
+  if (mutate == null) {
     throw new Error('useAnswer must be used within Game Provider')
   }
-  return (answer: GameContext['answers'][number]) => {
-    game.answers.push(answer)
+  return (answer: GameState['answers'][number]) => {
+    mutate.setGame((game) => {
+      if (game.answers.find((a) => a.id === answer.id) === undefined) {
+        const answers = [...game.answers, answer]
+        game.answers = answers
+        return { ...game }
+      }
+      return game
+    })
   }
-}
-
-export const useResult = () => {
-  const game = useContext(ctx)
-  if (game == null) {
-    throw new Error('useAnswer must be used within Game Provider')
-  }
-  return [...game.answers]
 }

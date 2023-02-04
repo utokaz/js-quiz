@@ -1,18 +1,18 @@
-import SyntaxHighlighter from 'react-syntax-highlighter/dist/esm/default-highlight'
-import { nightOwl } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
+import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import styles from '../styles/Quiz.module.css'
 import { dataSource } from '../dataSource'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAnswer, useIsPlaying } from '../privider/GameProvider'
+import { useAnswer, useGame } from '../privider/GameProvider'
 import useBreakpoints from '../hooks/useBreakPoints'
+import { Prism } from 'react-syntax-highlighter'
 
 export const Quiz = () => {
   const navigate = useNavigate()
+  const { isPlaying } = useGame()
   const answer = useAnswer()
   const [gameIndex, setGameIndex] = useState(0)
   const quiz = dataSource[gameIndex]
-  const isPlaying = useIsPlaying()
   const { isXs } = useBreakpoints()
   const innerContainerRef = useRef<HTMLDivElement | null>(null)
 
@@ -30,12 +30,14 @@ export const Quiz = () => {
     if (!isPlaying) {
       navigate('/', { replace: true })
     }
-  }, [isPlaying, navigate])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     const containerRef = innerContainerRef.current
-    if (innerContainerRef.current) {
-      requestAnimationFrame(() => {
+    let id: number | undefined
+    if (containerRef) {
+      id = requestAnimationFrame(() => {
         if (innerContainerRef.current) {
           innerContainerRef.current.style.transition = '600ms'
           innerContainerRef.current.style.opacity = '1'
@@ -49,6 +51,10 @@ export const Quiz = () => {
         containerRef.style.opacity = ''
         containerRef.style.transform = ''
       }
+      if (id !== undefined) {
+        cancelAnimationFrame(id)
+        id = undefined
+      }
     }
   }, [gameIndex])
 
@@ -59,11 +65,11 @@ export const Quiz = () => {
           <span>Q{gameIndex + 1}. </span>
           <p className={styles.quiz_phrase}>{quiz.question}</p>
         </div>
-        {quiz.Image && <quiz.Image className={styles.image} />}
+        {quiz.Image && quiz.Image}
         {quiz.code && (
-          <SyntaxHighlighter
-            language="js"
-            style={nightOwl}
+          <Prism
+            language="javascript"
+            style={dracula}
             customStyle={{
               maxWidth: '80%',
               padding: '24px',
@@ -73,7 +79,7 @@ export const Quiz = () => {
             }}
           >
             {quiz.code}
-          </SyntaxHighlighter>
+          </Prism>
         )}
 
         <div className={styles.answer_container}>

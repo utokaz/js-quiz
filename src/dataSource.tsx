@@ -1,17 +1,18 @@
-import { ComponentPropsWithoutRef, PropsWithoutRef, ReactNode } from 'react'
+import { ReactElement } from 'react'
 import brendanEichImage from './assets/BrendanEich.jpeg'
 import jsLogo from './assets/js_logo.png'
+import styles from './styles/DataSource.module.css'
 
 type DataSource = {
   id: number
   question: string
   code?: string
   answerId: number
-  Image?: (props: ComponentPropsWithoutRef<'img'>) => JSX.Element
+  Image?: ReactElement
   keywords?: string[]
   selections: {
     id: number
-    selectStr: JSX.Element | string
+    selectStr: ReactElement | string
   }[]
 }[]
 
@@ -21,13 +22,11 @@ export const dataSource: DataSource = [
     question:
       '2022年現在、JavaScriptは現在全てのウェブサイトのうちどのくらいの割合で利用されているでしょう？',
     answerId: 2,
-    Image: (props) => (
+    Image: (
       <img
         alt="javascript logo"
         height={300}
-        aspect-ratio={1}
-        {...props}
-        style={{ borderRadius: '24px' }}
+        className={styles.image}
         src={jsLogo}
       />
     ),
@@ -43,24 +42,15 @@ export const dataSource: DataSource = [
     question:
       'ブレンダン・アイク(JavaScriptの生みの親)がJavaScriptを作るのにかかった期間は次のうちどれでしょう？',
     answerId: 1,
-    Image: (props) => (
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '8px',
-        }}
-      >
+    Image: (
+      <div className={styles.eich_image_container}>
         <img
           alt="Brendan Eich"
           height={300}
-          aspect-ratio={1}
-          {...props}
-          style={{ borderRadius: '24px' }}
+          className={styles.image}
           src={brendanEichImage}
         />
-        <p style={{ margin: '0px', fontSize: '4px' }}>
+        <p className={styles.eich_cap}>
           <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Brendan_Eich_Mozilla_Foundation_official_photo.jpg/1024px-Brendan_Eich_Mozilla_Foundation_official_photo.jpg">
             Brendan_Eich_Mozilla_Foundation_official_photo.jpg
           </a>
@@ -82,7 +72,7 @@ export const dataSource: DataSource = [
     code: `var companyName = "sys21"
 
 for (let i = 0; i< 5; i++) {
-    var companyName = \`sys2\${\i\}\`
+    var companyName = \`sys2\${i}\`
 }
 
 console.log(companyName)`,
@@ -112,7 +102,7 @@ console.log(companyName)`,
     id: 5,
     question: 'このプログラムを実行したときの出力結果を選んでください',
     code: `class Person {
-    hobby = "paly piano"
+    hobby = "play piano"
     logHobbyOneSecLater = function() {
         // 第一引数に1000ミリ秒後(1秒後)に実行される関数を渡す
         setTimeout(function() {
