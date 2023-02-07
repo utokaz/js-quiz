@@ -1,6 +1,7 @@
 .container {
   overflow-y: auto;
   height: 100vh;
+  background-color: var(--main-bg-color);
 }
 
 .inner_container {

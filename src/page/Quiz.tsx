@@ -85,7 +85,7 @@ export const Quiz = () => {
         <div className={styles.answer_container}>
           {quiz.selections.map((s) => (
             <button
-              key={s.id}
+              key={s.id + gameIndex * quiz.selections.length}
               className={styles.answer_button}
               onClick={() => onClickAnswer(s.id)}
             >
